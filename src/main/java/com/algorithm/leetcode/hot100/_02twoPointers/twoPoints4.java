@@ -1,7 +1,7 @@
 package com.algorithm.leetcode.hot100._02twoPointers;
 
 /**
- * @description: 接雨水
+ * @description:  #42 接雨水
  * @author: shangqj
  * @date: 2024/1/4
  * @version: 1.0
