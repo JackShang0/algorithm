@@ -1,4 +1,4 @@
-package com.algorithm.leetcode.hot100.twoPointers;
+package com.algorithm.leetcode.hot100._02twoPointers;
 
 /**
  * @description: #11  盛水最多的容器
