@@ -36,10 +36,12 @@ public class hash2 {
         List<List<String>> lists2 = groupAnagrams2(strings);
         List<List<String>> lists3 = groupAnagrams3(strings);
         List<List<String>> lists4 = groupAnagrams4(strings);
+        List<List<String>> lists5 = groupAnagrams5(strings);
         System.out.println("lists = " + lists);
         System.out.println("lists2 = " + lists2);
         System.out.println("lists3 = " + lists3);
         System.out.println("lists4 = " + lists4);
+        System.out.println("lists5 = " + lists5);
     }
 
 
@@ -133,6 +135,29 @@ public class hash2 {
                     return new String(charArray);
                 })
         ).values())  ;
+    }
+
+
+    /**
+     * 2024.1.5
+     */
+    public static List<List<String>> groupAnagrams5(String[] strs) {
+        HashMap<String, List> map = new HashMap<>();
+
+        for (String str : strs) {
+            char[] charArray = str.toCharArray();
+            Arrays.sort(charArray);
+            //todo  char数组转字符串的两种方法
+            String key = Arrays.toString(charArray);
+            String s = new String(charArray);
+            System.out.println("s = " + s);
+            if (!map.containsKey(key)){
+                map.put(key,new ArrayList());
+            }
+            map.get(key).add(str);
+        }
+        return new ArrayList(map.values());
+
     }
 
 }

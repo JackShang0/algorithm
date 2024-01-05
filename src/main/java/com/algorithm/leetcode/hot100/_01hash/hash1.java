@@ -1,5 +1,6 @@
 package com.algorithm.leetcode.hot100._01hash;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -135,6 +136,26 @@ public class hash1 {
         }
         return result;
     }
+
+    /**
+     * 2024/01/05   前提：只返回一种答案，数组元素不重复出现
+     */
+    public static int[] twoSum5(int[] nums, int target) {
+        //1、创建一个map  key为具体值，value为索引
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        //2、遍历数组
+        for (int i = 0; i < nums.length; i++) {
+            //4、如果map中含有满足和为target的值，则直接返回索引的int[]
+            if (map.containsKey( target - nums[i])) {
+                return new int[]{map.get(target-nums[i]),i};
+            }
+            //3、如果map里面没有这个值，那就将这个值和索引给放进去
+            map.put(nums[i],i );
+        }
+        throw new IllegalArgumentException("args error");
+    }
+
 
 
 

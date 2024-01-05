@@ -66,31 +66,40 @@ public class twoPoints1 {
         for (int num : nums) {
             System.out.println(num);
         }
-
     }
 
 
     public static void moveZeroes2(int[] nums) {
-
         if (nums.length == 0) {
             return;
         }
-
         int j = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
                 nums[j++] = nums[i];
             }
         }
-
         for (int i = j; i < nums.length; i++) {
             nums[i] = 0;
         }
-
         for (int num : nums) {
             System.out.println("j = " + num);
         }
 
+    }
 
+
+    /**
+     * 2024.1.5
+     * @param nums 数组
+     */
+    public static void moveZeroes3(int[] nums) {
+        int start = 1;
+        int end = nums.length - 1;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+
+            }
+        }
     }
 }

@@ -30,12 +30,17 @@ public class hash3 {
      */
     public static void main(String[] args) {
         int[] ints = new int[]{100, 4, 200, 1, 3, 2};
-        int [] ints1 =new int[]{9,1,4,7,3,-1,0,5,8,-1,6};
+        int[] ints1 = new int[]{9, 1, 4, 7, 3, -1, 0, 5, 8, -1, 6};
 
-        int i = longestConsecutive(ints1);
-        int i0 = longestConsecutive0(ints1);
+
+        int i = longestConsecutive(ints);
+        int i0 = longestConsecutive0(ints);
+        int i1 = longestConsecutive1(ints);
+        int i2 = longestConsecutive2(ints);
         System.out.println("i = " + i);
         System.out.println("i0 = " + i0);
+        System.out.println("i1 = " + i1);
+        System.out.println("i2 = " + i2);
     }
 
     public static int longestConsecutive(int[] nums) {
@@ -51,13 +56,16 @@ public class hash3 {
         int gap = 1;
 
 
+        ArrayList<Set<Integer>> arrayList = new ArrayList<>();
         ArrayList<Integer> list = new ArrayList<>(set);
         HashSet<Integer> integers = new HashSet<>();
         for (int i = 1; i < list.size(); i++) {
-            if (list.get(i) - list.get(i-1) == gap) {
+            //integers = new HashSet<>();
+            if (list.get(i) - list.get(i - 1) == gap) {
                 integers.add(list.get(i));
-                integers.add(list.get(i-1));
+                integers.add(list.get(i - 1));
             }
+            arrayList.add(integers);
         }
 
         /*for (int i = 1; i < nums.length; i++) {
@@ -74,12 +82,14 @@ public class hash3 {
             }
         }*/
         System.out.println(list);
+        System.out.println(arrayList);
         return integers.size();
     }
 
 
     /**
      * 好难理解
+     *
      * @param nums
      * @return
      */
@@ -93,11 +103,11 @@ public class hash3 {
         int longestStreak = 0;
 
         for (Integer integer : set) {
-            if (!set.contains(integer-1)){
+            if (!set.contains(integer - 1)) {
                 int currentNum = integer;
                 int currentStreak = 1;
 
-                while (set.contains(currentNum + 1)){
+                while (set.contains(currentNum + 1)) {
                     currentNum += 1;
                     currentStreak += 1;
                 }
@@ -107,4 +117,57 @@ public class hash3 {
         }
         return longestStreak;
     }
+
+
+    /**
+     * 2024.1.5
+     * 解法2：
+     */
+    public static int longestConsecutive1(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        Arrays.sort(nums);
+        int result = 1;
+        int max = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {   //相等则继续循环
+                continue;
+            }
+            else if (nums[i] == nums[i - 1] + 1) {    //如果连续 则result+1
+                result++;
+            }
+            else {    //其他情况则 result=1
+                result = 1;
+            }
+            max = Math.max(max, result);
+        }
+        return max;
+    }
+
+
+    /**
+     * 2024.1.5
+     */
+    public static int longestConsecutive2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        Arrays.sort(nums);
+        int result = 1;
+        int max = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {
+                continue;
+            } else if (nums[i] == nums[i - 1] + 1) {
+                result++;
+            } else {
+                result = 1;
+            }
+            max = Math.max(max, result);
+        }
+        return max;
+    }
+
+
 }
