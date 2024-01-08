@@ -26,7 +26,11 @@ public class twoPoints2 {
     public static void main(String[] args) {
         int[] ints1 = new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7};
         int i = maxArea(ints1);
+        int i4 = maxArea4(ints1);
+        int i5 = maxArea5(ints1);
         System.out.println(i);
+        System.out.println(i4);
+        System.out.println(i5);
     }
 
     /**
@@ -90,6 +94,54 @@ public class twoPoints2 {
         while (i < j) {
             res = height[i] < height[j] ?
                     Math.max(res, (j - i) * height[i++]) : Math.max(res, (j - i) * height[j--]);
+        }
+        return res;
+    }
+
+
+    /**
+     * 2024.1.8  盛水最多容器
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     *
+     * @param height 数组
+     * @return 最大值
+     */
+    public static int maxArea4(int[] height) {
+
+        //定义左右两边的指针
+        int res = 0;
+        int i = 0;
+        int j = height.length - 1;
+
+
+        //当指针没有相遇时
+        while (i < j) {
+            //那边小那边向中间移动，寻找更大的值 同时 * （j-i）  -> 并且进行赋值与判断
+            res = height[i] < height[j] ?
+                    Math.max(res, (j - i) * height[i++]) : Math.max(res, (j - i) * height[j--]);
+        }
+        return res;
+    }
+
+
+    /**
+     * 盛水最大容量
+     *
+     * @param height 数组
+     * @return 返回容量
+     */
+    public static int maxArea5(int[] height) {
+        //定义左右两个指针
+        int ri = 0;
+        int le = height.length - 1;
+
+        //定义最终容量
+        int res = 0;
+
+        while (ri < le) {
+            res = height[ri] < height[le] ?
+                    Math.max(res, (le - ri) * height[ri++]) : Math.max(res, (le - ri) * height[le--]);
         }
         return res;
     }

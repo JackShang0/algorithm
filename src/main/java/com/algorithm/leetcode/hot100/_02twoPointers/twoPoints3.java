@@ -40,9 +40,16 @@ public class twoPoints3 {
      */
     public static void main(String[] args) {
         int[] ints = {-1, 0, 1, 2, -1, -4};
-        List<List<Integer>> lists = threeSum(ints);
-        List<List<Integer>> lists3 = threeSum3(ints);
+        int[] ints1 = {0, 1, 1};//[0,1,1]
+        int[] ints2 = {0, 0, 0};//[0,0,0]
+        List<List<Integer>> lists = threeSum(ints2);
+        List<List<Integer>> lists3 = threeSum3(ints2);
+        List<List<Integer>> lists5 = threeSum5(ints2);
+        List<List<Integer>> lists6 = threeSum6(ints2);
+        System.out.println("lists = " + lists);
         System.out.println("lists = " + lists3);
+        System.out.println("lists = " + lists5);
+        System.out.println("lists = " + lists6);
 
     }
 
@@ -164,9 +171,9 @@ public class twoPoints3 {
                 int sum = nums[i] + nums[R] + nums[L];
                 if (sum == 0) {
                     list.add(Arrays.asList(nums[i], nums[R], nums[L]));
-                    while (nums[L] == nums[L + 1])
+                    while (L < R && nums[L] == nums[L + 1])
                         L++;
-                    while (nums[R] == nums[R - 1])
+                    while (L < R && nums[R] == nums[R - 1])
                         R--;
 
                     //这个是为啥 没太明白？？？
@@ -217,6 +224,100 @@ public class twoPoints3 {
                     L++;
                 else if (sum > 0)
                     R--;
+            }
+        }
+        return list;
+    }
+
+
+    public static List<List<Integer>> threeSum5(int[] nums) {
+        ArrayList<List<Integer>> list = new ArrayList<>();
+        if (nums.length < 3)
+            return list;
+
+        //从小到大
+        Arrays.sort(nums);
+
+
+        for (int i = 0; i < nums.length - 1; i++) {
+            //去除重复的值   重复值不进行遍历
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+
+            int L = i + 1;
+            int R = nums.length - 1;
+
+            //如果大于0  则继续循环  todo
+            if (nums[i] > 0) {
+                break;
+            }
+
+
+            while (L < R) {
+                int sum = nums[i] + nums[L] + nums[R];
+                if (sum == 0) {
+                    list.add(Arrays.asList(nums[i], nums[L], nums[R]));
+                    //todo  重复值不参与
+                    while (L < R && nums[L] == nums[L + 1])
+                        L++;
+                    while (L < R && nums[R] == nums[R - 1])
+                        R--;
+
+                    R--;
+                    L++;
+
+                } else if (sum > 0) {
+                    R--;
+                } else if (sum < 0) {
+                    L++;
+                }
+            }
+        }
+        return list;
+    }
+
+
+    public static List<List<Integer>> threeSum6(int[] nums) {
+        ArrayList<List<Integer>> list = new ArrayList<>();
+        if (nums == null || nums.length < 3)
+            return list;
+
+        //排序
+        Arrays.sort(nums);
+
+        //数组遍历  定义两个指针 左面的从i+1开始，右面从数组最大开始
+        for (int i = 0; i < nums.length; i++) {
+            //i去重
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+
+            int le = i + 1;
+            int ri = nums.length - 1;
+
+            //如果大于0，则跳过
+            if (nums[i] > 0)
+                break;
+
+            //当两个指针不相遇时
+            while (le < ri) {
+
+                int sum = nums[i] + nums[le] + nums[ri];
+                //和为0，则添加到list中，同时对le和ri的值进行去重和向中间移动
+                if (sum == 0) {
+                    list.add(Arrays.asList(nums[i], nums[le], nums[ri]));
+                    //注意条件  le < ri
+                    while (le < ri && nums[le] == nums[le + 1])
+                        le++;
+                    while (le < ri && nums[ri] == nums[ri - 1])
+                        ri--;
+
+                    ri--;
+                    le++;
+                } else if (sum < 0) {      //小于0，则需要向右移动
+                    le++;
+                } else if (sum > 0) {     //大于0，则需要向左移动
+                    ri--;
+                }
             }
         }
         return list;

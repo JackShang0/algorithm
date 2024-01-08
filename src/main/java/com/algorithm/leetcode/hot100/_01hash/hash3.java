@@ -37,10 +37,12 @@ public class hash3 {
         int i0 = longestConsecutive0(ints);
         int i1 = longestConsecutive1(ints);
         int i2 = longestConsecutive2(ints);
+        int i3 = longestConsecutive3(ints);
         System.out.println("i = " + i);
         System.out.println("i0 = " + i0);
         System.out.println("i1 = " + i1);
         System.out.println("i2 = " + i2);
+        System.out.println("i3 = " + i3);
     }
 
     public static int longestConsecutive(int[] nums) {
@@ -169,5 +171,37 @@ public class hash3 {
         return max;
     }
 
+
+    /**
+     * 数组中最长连续序列
+     * 定义一个序列长度 result
+     *      对序列数组进行循环
+     *      如果当前数与前一个数相等  则跳过
+     *      如果当前数与前一个数相差1 则result++
+     *      如果是其他情况，则将result置为初始值1
+     *      比较最终值max与result的大小，返回最大值
+     * @param nums
+     * @return
+     */
+    public static int longestConsecutive3(int[] nums) {
+        if (nums.length==0){
+            return 0;
+        }
+
+        int result = 1;
+        int max = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i]==nums[i-1])
+                continue;
+            else if (nums[i]-nums[i-1]==1){
+                result++;
+            }else {
+                result = 1;
+            }
+            max = Math.max(max, result);
+        }
+        return max;
+
+    }
 
 }
