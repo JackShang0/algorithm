@@ -28,7 +28,7 @@ public class list2 {
      */
     public static void main(String[] args) {
         int[][] intervals = new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}};
-
+        int[][] ints = merge2(intervals);
     }
 
 
@@ -52,6 +52,11 @@ public class list2 {
         return arrayList.toArray(new int[arrayList.size()][2]);
     }
 
+    /**
+     * 2024.1.10
+     * @param intervals
+     * @return
+     */
     public static int[][] merge1(int[][] intervals) {
         //创建一个数组，因为不好确定二维数组的第一个纬度的值大小
         ArrayList<int[]> ints = new ArrayList<>();
@@ -73,6 +78,34 @@ public class list2 {
 
 
         //转换为二维数组
+        return ints.toArray(new int[ints.size()][2]);
+    }
+
+
+    /**
+     * 2024.1.11
+     * @param intervals
+     * @return
+     */
+    public static int[][] merge2(int[][] intervals) {
+
+        //创建一个list，因为数组需要确定一维的长度  暂时未知，需要后面转为二维数组
+        ArrayList<int[]> ints = new ArrayList<>();
+
+        //排序  以区间的开区间大小排序
+        Arrays.sort(intervals,(a,b) -> a[0]-b[0]);
+
+        for (int[] interval : intervals) {
+            //如果当前 interval 的左边大于当前 ints 中最右边的区间，则添加到 ints中
+            if (ints.size()==0 || interval[0]>ints.get(ints.size()-1)[1]){
+                ints.add(interval);
+            }else {
+                //否则 说明区间之间有交集，需要做合并处理
+                ints.get(ints.size()-1)[1]=Math.max(interval[1],ints.get(ints.size()-1)[1]);
+            }
+        }
+
+
         return ints.toArray(new int[ints.size()][2]);
     }
 }

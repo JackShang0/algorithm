@@ -28,8 +28,10 @@ public class list1 {
         int[] ints = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
         int i = maxSubArray(ints);
         int i1 = maxSubArray1(ints);
+        int j = maxSubArray2(ints);
         System.out.println("i = " + i);
         System.out.println("i1 = " + i1);
+        System.out.println("j = " + j);
     }
 
 
@@ -71,5 +73,34 @@ public class list1 {
             maxAns = Math.max(maxAns,sum);
         }
         return maxAns;
+    }
+
+
+    /**
+     * 暴力法
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray2(int[] nums) {
+        int re = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            int sum = 0;
+            for (int j = i; j < nums.length; j++) {
+                sum = sum+nums[j];
+            }
+            re = Math.max(re,sum);
+        }
+        return re;
+    }
+
+
+    /**
+     * 分治
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray3(int[] nums) {
+
+        return 0;
     }
 }
