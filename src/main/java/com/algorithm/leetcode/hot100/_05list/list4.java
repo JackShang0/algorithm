@@ -20,7 +20,7 @@ public class list4 {
      * 输入: nums = [-1,1,0,-3,3]
      * 输出: [0,0,9,0,0]
      *
-     * @param args
+     * @param args a
      */
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4};
