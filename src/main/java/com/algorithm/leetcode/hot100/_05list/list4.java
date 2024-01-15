@@ -19,14 +19,14 @@ public class list4 {
      示例 2:
      输入: nums = [-1,1,0,-3,3]
      输出: [0,0,9,0,0]
-     * @param args
+     * @param  args a
      */
     public static void main(String[] args) {
         int[] nums = {1,2,3,4};
         productExceptSelf3(nums);
         int[] ints = new int[nums.length];
         for (int i = 0; i < ints.length; i++) {
-//            ints[i] =
+            System.out.println("ints = " + ints[i]);
         }
 
     }
@@ -35,8 +35,8 @@ public class list4 {
     /**
      * 1.15
      * 先求前缀积  再求后缀积  合并乘积 并返回 注意第一个前缀乘积为1  最后一个前缀积 也为1
-     * @param nums
-     * @return
+     * @param nums 数组
+     * @return 返回值
      */
     public static int[] productExceptSelf3(int[] nums) {
 
