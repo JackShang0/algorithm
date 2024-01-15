@@ -23,7 +23,7 @@ public class list4 {
      */
     public static void main(String[] args) {
         int[] nums = {1,2,3,4};
-        productExceptSelf(nums);
+        productExceptSelf3(nums);
         int[] ints = new int[nums.length];
         for (int i = 0; i < ints.length; i++) {
 //            ints[i] =
