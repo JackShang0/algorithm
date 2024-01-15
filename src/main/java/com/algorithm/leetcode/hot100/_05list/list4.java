@@ -60,19 +60,19 @@ public class list4 {
         ints[0]=1;
         for (int i = 1; i < nums.length; i++) {
             ints[i]=ints[i-1] * nums[i-1] ;
-            System.out.println("i = " + ints[i]);
+            //System.out.println("i = " + ints[i]);
         }
-        System.out.println("ints.length = " + ints.length);
+        //System.out.println("ints.length = " + ints.length);
         //前缀[1，2，6，24]nums[i]
 
         int R = 1;
         for (int i = ints.length-1; i >= 0; i--) {
             //System.out.println("nums[i] = " + nums[i]);
             //后缀【24、12、4、1】
-            System.out.println("R = " + R);
+            //System.out.println("R = " + R);
             ints[i] = R*ints[i];
             R *= nums[i];
-            System.out.println("result= " + i +"   "+ints[i]);
+            //System.out.println("result= " + i +"   "+ints[i]);
         }
 
 
