@@ -23,6 +23,7 @@ public class list4 {
      */
     public static void main(String[] args) {
         int[] nums = {1,2,3,4};
+        productExceptSelf(nums);
         int[] ints = new int[nums.length];
         for (int i = 0; i < ints.length; i++) {
 //            ints[i] =
@@ -31,9 +32,30 @@ public class list4 {
     }
 
 
-    public static int[] productExceptSelf(int[] nums) {
+    /**
+     * 1.15
+     * 先求前缀积  再求后缀积  合并乘积 并返回 注意第一个前缀乘积为1  最后一个前缀积 也为1
+     * @param nums
+     * @return
+     */
+    public static int[] productExceptSelf3(int[] nums) {
 
         int[] ints = new int[nums.length];
+        ints[0] = 1;
+        for (int i = 1; i < nums.length; i++) {
+            ints[i]=nums[i-1]*ints[i-1];
+            System.out.println("ints[i] = " + ints[i]);
+            //前缀  1、1、2、6
+        }
+
+        //System.out.println("========== " );
+        int R = 1;
+        for (int i = ints.length-1; i >= 0; i--) {
+            ints[i] = R*ints[i];
+            //System.out.println("ints[i] = " + ints[i]);
+            R *= nums[i];
+            //System.out.println("R = " + R);
+        }
 
 
         return ints;
