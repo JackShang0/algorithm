@@ -25,8 +25,10 @@ public class matrix2 {
      */
     public static void main(String[] args) {
         int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        List<Integer> integers = spiralOrder(matrix);
-        System.out.println("integers = " + integers);
+        //List<Integer> integers = spiralOrder(matrix);
+        List<Integer> integers2 = spiralOrder2(matrix);
+        //System.out.println("integers = " + integers);
+        System.out.println("integers2 = " + integers2);
 
     }
 
@@ -77,13 +79,21 @@ public class matrix2 {
     }
 
 
+    /**
+     * 问题定位并解决 两个地方
+
+     nextRow >= rows || nextCol >= columns   ->  nextRow >= rows || nextCol >= columns
+     || visit[row][col])  ->  || visit[nextRow][nextCol])
+     * @param matrix
+     * @return
+     */
     public static List<Integer> spiralOrder1(int[][] matrix) {
         ArrayList<Integer> list = new ArrayList<>();
 
         //定义行
         int rows = matrix.length, columns = matrix[0].length;
         //定义方向  即坐标轴的方向
-        int[][] dir ={{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int[][] dir = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         //访问标识
         boolean[][] visit = new boolean[rows][columns];
         //方向索引
@@ -98,13 +108,58 @@ public class matrix2 {
             visit[row][column] = true;
             int nextRow = row + dir[dirIndex][0];
             int nextCol = column + dir[dirIndex][1];
-            if (nextRow < 0 || nextRow >= rows || nextCol < 0 || nextCol >= columns || visit[row][column]) {
+            //此处需要包含 >=
+            if (nextRow < 0 || nextRow >= rows || nextCol < 0 || nextCol >= columns
+                    //注意此处的索引是应该是下一个位置
+                    || visit[nextRow][nextCol]) {
                 dirIndex = (dirIndex + 1) % 4;
             }
 
             row += dir[dirIndex][0];
             column += dir[dirIndex][1];
         }
+        return list;
+    }
+
+
+    /**
+     * 2024.1.15  ac by self
+     * @param matrix
+     * @return
+     */
+    public static List<Integer> spiralOrder2(int[][] matrix) {
+        ArrayList<Integer> list = new ArrayList<>();
+        //定义行和列
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        //定义数组大小
+        int total = rows * columns;
+        //定义初始位置
+        int row = 0, col = 0;
+        //标记位置的二维数组
+        boolean[][] visit = new boolean[rows][columns];
+        //方向数组
+        int[][] dir = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        //方向索引
+        int dirIndex = 0;
+
+        for (int i = 0; i < total; i++) {
+            list.add(matrix[row][col]);
+            //位置标记
+            visit[row][col] = true;
+            int nextRow = row + dir[dirIndex][0];
+            int nextCol = col + dir[dirIndex][1];
+            //如果超出当前数组的最大值，并且下一个位置已经被访问过  就对索引进行+1，然后改变其方向
+            if (nextRow < 0 || nextCol < 0 || nextRow >= rows || nextCol >= columns || visit[nextRow][nextCol]) {
+                dirIndex = (dirIndex +1) % 4;
+            }
+
+            //方向进行控制  行加索引为0的位置   列加索引为1的位置
+            row += dir[dirIndex][0];
+            col += dir[dirIndex][1];
+        }
+
+
         return list;
     }
 }
