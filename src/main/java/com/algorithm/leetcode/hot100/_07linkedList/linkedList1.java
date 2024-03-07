@@ -38,7 +38,7 @@ public class linkedList1 {
      * — 请注意相交节点的值不为 1，因为在链表 A 和链表 B 之中值为 1 的节点 (A 中第二个节点和 B 中第三个节点) 是不同的节点。
      * 换句话说，它们在内存中指向两个不同的位置，而链表 A 和链表 B 中值为 8 的节点 (A 中第三个节点，B 中第四个节点) 在内存中指向相同的位置。
      *
-     * @param args
+     * @param args a
      */
     public static void main(String[] args) {
 
@@ -50,10 +50,8 @@ public class linkedList1 {
         listNodeA.next = new ListNode(4);
         listNodeA = listNodeA.next;
         listNodeA.next = new ListNode(5);
-        if (listNodeA.next!=null) {
+        System.out.println("listNodeA = " + listNodeA.next);
 
-            System.out.println("listNodeA = " + listNodeA.next);
-        }
 
         ListNode listNodeB = new ListNode(5);
         listNodeB.next = new ListNode(6);
@@ -122,9 +120,10 @@ public class linkedList1 {
 
     /**
      * 让长的那个链表从 m-n 的位置开始遍历
-     * @param headA
-     * @param headB
-     * @return
+     *
+     * @param headA nodeA
+     * @param headB nodeB
+     * @return node
      */
     /*public static ListNode getIntersectionNode3(ListNode headA, ListNode headB) {
 
@@ -144,18 +143,42 @@ public class linkedList1 {
         }
 
     }*/
-
     public static ListNode getIntersectionNode3(ListNode headA, ListNode headB) {
 
-        if (headA == null || headB==null)
+        if (headA == null || headB == null)
             return null;
 
-        ListNode nodeA = headA,nodeB = headB;
-        while (nodeA != nodeB){
-            nodeA = nodeA == null?headB:nodeA.next;
-            nodeB = nodeB ==null?headA:nodeB.next;
+        ListNode nodeA = headA, nodeB = headB;
+        while (nodeA != nodeB) {
+            nodeA = nodeA == null ? headB : nodeA.next;
+            nodeB = nodeB == null ? headA : nodeB.next;
         }
         return headA;
+    }
+
+
+    /**
+     * 相交链表
+     * @param headA 链表A
+     * @param headB 链表B
+     * @return 相交的节点
+     */
+    public ListNode getIntersectionNode4(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+
+        //使用双指针分别从链表的两个头节点开始遍历链表
+        ListNode nodeA = headA, nodeB = headB;
+        //如果节点A不等于节点B，作为控制条件一直向后遍历链表
+        while (nodeA != nodeB) {
+            //如果当前节点为空，则跳到另一条链表的头节点开始，否则将一直向链表下一个节点遍历
+            //将先遍历完第一个链表，然后跳另一个链表开始遍历，为了保证两个开始位置的索引一致
+            nodeA = nodeA == null ? headB : nodeA.next;
+            nodeB = nodeB == null ? headA : nodeB.next;
+        }
+
+        return nodeA;
     }
 }
 

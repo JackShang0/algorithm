@@ -28,7 +28,7 @@ public class linkedList2 {
      * <p>
      * 进阶：链表可以选用迭代或递归方式完成反转。你能否用两种方法解决这道题？
      *
-     * @param args
+     * @param args a
      */
     public static void main(String[] args) {
 
@@ -40,9 +40,9 @@ public class linkedList2 {
         listNodeA.next = new ListNode(4);
         listNodeA = listNodeA.next;
         listNodeA.next = new ListNode(5);
+        System.out.println("listNodeA = " + listNodeA.next);
         if (listNodeA.next != null) {
 
-            System.out.println("listNodeA = " + listNodeA.next);
         }
 
         ListNode listNodeB = new ListNode(5);
@@ -95,8 +95,8 @@ public class linkedList2 {
 
     public static ListNode reverseList3(ListNode head) {
 
-        ListNode preNode = null,curNode = head;
-        while (curNode != null){
+        ListNode preNode = null, curNode = head;
+        while (curNode != null) {
             ListNode next = curNode.next;
             curNode.next = preNode;
 
@@ -104,6 +104,30 @@ public class linkedList2 {
             curNode = next;
         }
         return preNode;
+    }
+
+
+    /**
+     * 反转链表
+     *
+     * @param head 链表
+     * @return 反转后的链表
+     */
+    public static ListNode reverseList4(ListNode head) {
+
+        //使用双指针，一个指针指向前一个引用，一个指针指向当前节点
+        ListNode preNode = null, curNode = head;
+        if (curNode != null) {
+            ListNode next = curNode.next;
+            //第一个节点的后一个指向null
+            curNode.next = preNode;
+
+            //两个指针分别向后移动一个单位
+            preNode = curNode;
+            curNode = next;
+        }
+        return preNode;
+
     }
 }
 
