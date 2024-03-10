@@ -75,20 +75,47 @@ public class linkedList4 {
     public static boolean hasCycle1(ListNode head) {
 
         //如果链表长度不足二则返回false
-        if (head==null|| head.next==null)
+        if (head == null || head.next == null)
             return false;
 
         //定义两个指针，fast为head.next，slow为head，如果同为head则会导致while循环不执行
-        ListNode fast = head.next,slow = head;
-        while (fast != slow){
+        ListNode fast = head.next, slow = head;
+        while (fast != slow) {
             //为空，则说明链表不是环形
-            if (fast == null || fast.next ==null)
+            if (fast == null || fast.next == null)
                 return false;
 
             //定义快指针每次跳两个节点，慢指针每次跳一个节点
             fast = fast.next.next;
             slow = slow.next;
         }
+        return true;
+    }
+
+
+    /**
+     * 环形链表 3.10
+     *
+     * @param head 节点
+     * @return boolean
+     */
+    public static boolean hasCycle2(ListNode head) {
+        // 节点个数小于两个，则说明不是环形链表
+        if (head == null || head.next == null) {
+            return false;
+        }
+
+        ListNode fast = head.next, slow = head;
+        //如果两个节点
+        while (fast != slow) {
+            //如果 fast节点 为空或者 fast节点的下一个节点为空了，则说明无还 即返回false
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
         return true;
     }
 
