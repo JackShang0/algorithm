@@ -1,5 +1,11 @@
 package com.algorithm.leetcode.hot100._07linkedList;
 
+/**
+ * @description: #142 环形链表2
+ * @author: shangqj
+ * @date: 2024/3/10
+ * @version: 1.0
+ */
 public class linkedList5 {
     public static void main(String[] args) {
 
