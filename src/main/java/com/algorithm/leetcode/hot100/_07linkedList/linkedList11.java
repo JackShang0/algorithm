@@ -49,7 +49,7 @@ public class linkedList11 {
 
     /**
      * 算法思路：先拷贝链表的next的指向关系，再拷贝随机指针
-     *
+     * 使用回溯法 + 哈希表的方式
      * @param head
      * @return
      */
