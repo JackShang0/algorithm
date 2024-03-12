@@ -120,13 +120,13 @@ public class linkedList8 {
 
         ListNode pre = new ListNode(0);
         pre.next = head;
-        ListNode fast = pre,slow = pre;
-        while (n!=0){
+        ListNode fast = pre, slow = pre;
+        while (n != 0) {
             fast = fast.next;
             n--;
         }
 
-        while (fast.next!=null){
+        while (fast.next != null) {
             fast = fast.next;
             slow = slow.next;
         }
@@ -136,5 +136,33 @@ public class linkedList8 {
 
         return pre.next;
 
+    }
+
+
+    /**
+     * 为什么要使用
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd4(ListNode head, int n) {
+
+        //使用虚拟空节点
+        ListNode pre = new ListNode(0);
+        pre.next = head;
+        ListNode fast = pre, slow = pre;
+        while (n != 0) {
+            fast = fast.next;
+            n--;
+        }
+
+        while (fast.next != null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+
+        return pre.next;
     }
 }
