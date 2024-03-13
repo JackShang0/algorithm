@@ -71,12 +71,12 @@ public class linkedList10 {
             //查看剩余部分长度是否大于等于 k
             for (int i = 0; i < k; ++i) {
                 tail = tail.next;
-                if (tail == null){
+                if (tail == null) {
                     return hair.next;
                 }
             }
             ListNode next = tail.next;
-            ListNode[] reverse = reverse(head,tail);
+            ListNode[] reverse = reverse(head, tail);
             head = reverse[0];
             tail = reverse[1];
 
@@ -96,13 +96,13 @@ public class linkedList10 {
     private ListNode[] reverse(ListNode head, ListNode tail) {
         ListNode prev = tail.next;
         ListNode p = head;
-        while (prev!=tail){
+        while (prev != tail) {
             ListNode next = p.next;
             p.next = prev;
             prev = p;
             p = next;
         }
-        return new ListNode[]{tail,head};
+        return new ListNode[]{tail, head};
     }
 
 
@@ -113,18 +113,17 @@ public class linkedList10 {
         hair.next = head;
         ListNode pre = hair;
 
-
         while (head != null) {
             ListNode tail = pre;
             //查看剩余部分长度是否大于等于 k
             for (int i = 0; i < k; ++i) {
                 tail = tail.next;
-                if (tail == null){
+                if (tail == null) {
                     return hair.next;
                 }
             }
             ListNode next = tail.next;
-            ListNode[] reverse = reverse(head,tail);
+            ListNode[] reverse = reverse(head, tail);
             head = reverse[0];
             tail = reverse[1];
 
@@ -134,8 +133,110 @@ public class linkedList10 {
             pre = tail;
             head = tail.next;
         }
-
-
         return hair.next;
+    }
+
+
+    /**
+     * 2024.3.13
+     * 常规解题思路
+     * @param head 链表
+     * @param k k
+     * @return 链表
+     */
+    public ListNode reverseKGroup3(ListNode head, int k) {
+
+        //定义一个 虚拟头节点
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        //定义pre节点，这个节点是所有已经成功翻转之后的链表的尾节点
+        ListNode pre = dummy;
+        //定义一个end节点，这个节点的位置是每一次翻转链表的最后一个节点
+        ListNode end = dummy;
+
+        /**
+         * -1->1->2->3->4->5->6->7（-1为虚拟头节点）
+         * 为了避免影响已经翻转成功的节点以及后续需要翻转的节点，需要将翻转的子链表的前后指针断开（需要断开-1到1 之间，3与4之间）
+         * 同时需要记录子链表中的头节点 以及 指针断开后的后续链表节点的头节点（即需要记录1以及4的节点位置）
+         */
+
+        while (end.next != null) {
+            /**
+             * 将原链表按照k个一组进行划分，如果长度不足k个
+             * end不断向后移动，移动达不到k个节点，后面的节点就维持原有顺序
+             */
+            for (int i = 0; i < k && end != null; i++) {
+                //如果移动的次数小于k，并且节点不为空，就向后移动
+                end = end.next;
+            }
+
+            //如果发现 end 节点为空了，说明此时的节点个数不足k个，后续的链表保持原有顺序就行了
+            if(end == null){
+                break;
+            }
+
+            //next节点临时存储待翻转链表的第一个节点
+            ListNode next = end.next;
+
+            //翻转区中的节点与后续的链表断开
+            end.next = null;
+
+            //start 表示翻转区中的第一个节点
+            ListNode start = pre.next;
+
+            //翻转区的第一个节点与头节点的指针断开
+            pre.next = null;
+
+            //而pre要指向的节点就是我们翻转之后的头节点
+            pre.next = reverseList(start);
+
+            //然后为待翻转区的翻转做准备  next 为待翻转区的第一个节点
+            start.next = next;
+
+            //原来的 start -> end
+            pre = start;
+
+            //将end 设置为待翻转区的头节点的上一个节点
+            end = start;
+        }
+        return dummy.next;
+    }
+
+    /**
+     * 使用递归解决链表翻转的问题
+     * @param head 待翻转链表
+     * @return 翻转后的链表节点
+     */
+    private ListNode reverseList(ListNode head) {
+
+        if (head == null|| head.next ==null){
+            return head;
+        }
+
+        //使用递归不断调用，直到无法递归下去，递归的最小粒度是在最后一个节点
+        //因为到最后一个节点的时候，由于当前节点 head 的 next 节点是空的，所以会直接返回 head
+        ListNode node = reverseList(head.next);
+
+        head.next.next = head;
+
+        head.next = null;
+
+        return node;
+    }
+
+
+    /**
+     * todo
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode reverseKGroup4(ListNode head, int k) {
+
+        //定义一个 虚拟头节点
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        return dummy.next;
     }
 }
