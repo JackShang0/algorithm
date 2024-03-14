@@ -1,5 +1,6 @@
 package com.algorithm.leetcode.hot100._07linkedList;
 
+
 /**
  * @description: #25 K个一组翻转链表
  * @author: shangqj
@@ -140,8 +141,9 @@ public class linkedList10 {
     /**
      * 2024.3.13
      * 常规解题思路
+     *
      * @param head 链表
-     * @param k k
+     * @param k    k
      * @return 链表
      */
     public ListNode reverseKGroup3(ListNode head, int k) {
@@ -171,7 +173,7 @@ public class linkedList10 {
             }
 
             //如果发现 end 节点为空了，说明此时的节点个数不足k个，后续的链表保持原有顺序就行了
-            if(end == null){
+            if (end == null) {
                 break;
             }
 
@@ -204,12 +206,13 @@ public class linkedList10 {
 
     /**
      * 使用递归解决链表翻转的问题
+     *
      * @param head 待翻转链表
      * @return 翻转后的链表节点
      */
     private ListNode reverseList(ListNode head) {
 
-        if (head == null|| head.next ==null){
+        if (head == null || head.next == null) {
             return head;
         }
 
@@ -226,7 +229,8 @@ public class linkedList10 {
 
 
     /**
-     * todo
+     * 2024.3.14
+     *
      * @param head
      * @param k
      * @return
@@ -236,6 +240,77 @@ public class linkedList10 {
         //定义一个 虚拟头节点
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
+        //指向所有翻转成功链表的最后一个节点
+        ListNode pre = dummy;
+        //指向当前待翻转链表的最后一个节点
+        ListNode end = dummy;
+
+        //控制循环的条件
+        while (end.next != null) {
+
+            //控制指针向后移动k个节点
+            for (int i = 0; i < k && end != null; i++) {
+                end = end.next;
+            }
+
+            //临时保存未翻转链表的第一个节点
+            ListNode next = end.next;
+
+            //临时保存准备翻转链表的第一个节点
+            ListNode first = pre.next;
+
+            //断开待翻转链表的第一个节点和最后一个节点的下一个引用
+            pre.next = null;
+            end.next = null;
+
+            pre.next = reverseList(first);
+
+            //翻转后将这个节点指向待翻转的链表的第一个节点
+            first.next = next;
+
+            //移动指针节点
+            pre = first;
+
+            end = first;
+
+        }
+
+        return dummy.next;
+    }
+
+
+    public ListNode reverseKGroup5(ListNode head, int k) {
+
+        //定义一个 虚拟头节点
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        ListNode end = dummy;
+        ListNode pre = dummy;
+
+        //控制整体循环的条件
+        while (end.next != null) {
+
+            for (int i=0; i<k && end !=null;i++){
+                end = end.next;
+            }
+
+            if (end ==null){
+                break;
+            }
+
+            ListNode next = end.next;
+            end.next = null;
+            ListNode first = pre.next;
+            pre.next = null;
+
+            pre.next = reverseList(first);
+            first.next = next;
+
+            end = first;
+            pre = first;
+
+        }
 
         return dummy.next;
     }
