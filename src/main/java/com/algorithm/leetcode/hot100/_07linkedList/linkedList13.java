@@ -12,16 +12,27 @@ import java.util.Map;
 public class linkedList13 {
 
 
+    //定义头节点和尾节点
     Entry head, tail;
+    //缓存容量
     int capacity;
+    //当前缓存存入的数据的个数
     int size;
+    //为了快速查找key定义的map
     Map<Integer, Entry> cache;
 
 
+    /**
+     * cache用到的 map 和 双向链表的初始化方法
+     * @param capacity 容量
+     */
     public linkedList13(int capacity) {
+        //初始化容量
         this.capacity = capacity;
+        //初始化链表
         initLinkedList();
         size = 0;
+        //初始化map
         cache = new HashMap<>(capacity + 2);
     }
 
