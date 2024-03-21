@@ -53,10 +53,11 @@ public class hash1 {
         int target = 6;
         int[] ints1 = twoSum1(nums, target);
         int[] ints2 = twoSum2(nums, target);
+        int[] ints3 = twoSum6(nums, target);
         /*int[] ints3 = twoSum3(nums, target);
         int[] ints4 = twoSum4(nums, target);*/
 
-        for (int anInt : ints2) {
+        for (int anInt : ints3) {
             System.out.println("anInt = " + anInt);
         }
     }
@@ -156,6 +157,27 @@ public class hash1 {
         throw new IllegalArgumentException("args error");
     }
 
+
+    /**
+     * 两数只和
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int[] twoSum6(int[] nums, int target) {
+        //1、创建一个map  key为具体值，value为索引
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        //2、遍历数组
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])){
+                return new int[]{map.get(target - nums[i]),i};
+            }else {
+                map.put(nums[i],i);
+            }
+        }
+        throw new IllegalArgumentException("args error");
+    }
 
 
 
