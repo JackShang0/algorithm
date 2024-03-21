@@ -129,5 +129,21 @@ public class linkedList2 {
         return preNode;
 
     }
+
+
+    public static ListNode reverseList5(ListNode head) {
+
+        ListNode pre = null, cur = head;
+        pre.next = cur;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+
+            pre = cur;
+            cur = next;
+
+        }
+        return pre;
+    }
 }
 
