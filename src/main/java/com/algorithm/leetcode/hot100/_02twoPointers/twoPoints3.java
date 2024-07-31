@@ -45,11 +45,13 @@ public class twoPoints3 {
         List<List<Integer>> lists = threeSum(ints2);
         List<List<Integer>> lists3 = threeSum3(ints2);
         List<List<Integer>> lists5 = threeSum5(ints2);
-        List<List<Integer>> lists6 = threeSum6(ints);
+        List<List<Integer>> lists6 = threeSum6(ints2);
+        List<List<Integer>> lists7 = threeSum7(ints2);
         System.out.println("lists = " + lists);
         System.out.println("lists = " + lists3);
         System.out.println("lists = " + lists5);
         System.out.println("lists = " + lists6);
+        System.out.println("lists7 = " + lists7);
 
     }
 
@@ -324,49 +326,60 @@ public class twoPoints3 {
     }
 
 
-    public List<List<Integer>> threeSum7(int[] nums) {
+    /**
+     * 使用哈希的话会去重较复杂，建议使用双指针
+     * 1、因为是返回元素值相加为零的值，不需要返回索引，所以可以先进行排序
+     * 2、排序之后，可以带来的便利之处就是，当a、b、c三个数相加大于0，则移动指针向小的方向移动
+     * 3、去重是关键点
+     * 关键点1：num[i] == num[i+1]  与 num[i]==num[i-1]  使用 第二个
+     *
+     * @param nums
+     * @return
+     */
+    public static List<List<Integer>> threeSum7(int[] nums) {
         ArrayList<List<Integer>> list = new ArrayList<>();
-
-        if (nums.length < 3) {
-            return null;
-        }
-
         Arrays.sort(nums);
-
         for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                return list;
+            }
+
+            // i>0. 防止索引小于0 判断num[i]是否等于num[i-1] 用于去重
             if (i > 0 && nums[i] == nums[i - 1]) {
+
                 continue;
             }
-            if (nums[i] > 0) {
-                break;
-            }
-            // 定义两个指针
-            int le = i + 1;
-            int ri = nums.length - 1;
 
-            while (le < ri) {
-                int sum = nums[i] + nums[le] + nums[ri];
+            int left = i + 1;
+            int right = nums.length - 1;
 
-                if (sum == 0) {
-                    list.add(Arrays.asList(nums[i], nums[le], nums[ri]));
-
-                    if (le < ri && nums[le] == nums[le + 1]) {
-                        le++;
-                    }
-                    if (le < ri && nums[ri] == nums[ri - 1]) {
-                        ri--;
-                    }
-
-                    le++;
-                    ri--;
-                } else if (sum > 0) {
-                    ri--;
-                } else if (sum < 0) {
-                    le++;
+            while (right > left) {
+                if (nums[i] + nums[left] + nums[right] > 0) {
+                    right--;
+                } else if (nums[i] + nums[left] + nums[right] < 0) {
+                    left++;
+                } else {
+                    list.add(Arrays.asList(nums[i], nums[left], nums[right]));
                 }
+
+                while (right > left && nums[right] == nums[right - 1]) {
+                    right--;
+                }
+
+                //疑问1。此处为何要加 right > left ?
+                while (right > left && nums[left] == nums[left + 1]) {
+                    left++;
+                }
+
+                //疑问2:此处为何还要++和--
+                left++;
+                right--;
             }
 
         }
+
         return list;
     }
+
+
 }
