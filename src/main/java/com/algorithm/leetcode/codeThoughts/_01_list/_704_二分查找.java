@@ -3,10 +3,10 @@ package com.algorithm.leetcode.codeThoughts._01_list;
 public class _704_二分查找 {
     public static void main(String[] args) {
 
-
+        search(new int[]{},0);
     }
 
-    public int search(int[] nums, int target) {
+    public static int search(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
 
