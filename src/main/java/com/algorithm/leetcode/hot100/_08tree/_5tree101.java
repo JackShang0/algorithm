@@ -7,7 +7,25 @@ package com.algorithm.leetcode.hot100._08tree;
  * @version: 1.0
  */
 public class _5tree101 {
-    public boolean isSymmetric(TreeNode root) {
+
+    public static void main(String[] args) {
+        TreeNode treeNode = new TreeNode(3);
+        TreeNode treeNode1 = new TreeNode(9);
+        treeNode.left = treeNode1;
+
+        TreeNode treeNode2 = new TreeNode(9);
+        treeNode.right = treeNode2;
+
+        TreeNode treeNode3 = new TreeNode(15);
+        //treeNode2.left = treeNode3;
+
+        TreeNode treeNode4 = new TreeNode(7);
+        //treeNode2.right = treeNode4;
+        boolean symmetric = isSymmetric(treeNode);
+        System.out.println(symmetric);
+    }
+    public static boolean isSymmetric(TreeNode root) {
+
 
         return compare(root.left, root.right);
     }
@@ -20,7 +38,7 @@ public class _5tree101 {
      * @param right 右节点
      * @return
      */
-    private boolean compare(TreeNode left, TreeNode right) {
+    private static boolean compare(TreeNode left, TreeNode right) {
         //先对节点进行判断
         if (left != null && right == null) {
             return false;

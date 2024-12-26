@@ -10,13 +10,32 @@ import java.util.ArrayList;
  */
 public class _4tree226 {
 
+
+    public static void main(String[] args) {
+        TreeNode treeNode = new TreeNode(3);
+        TreeNode treeNode1 = new TreeNode(9);
+        treeNode.left = treeNode1;
+
+        TreeNode treeNode2 = new TreeNode(20);
+        treeNode.right = treeNode2;
+
+        TreeNode treeNode3 = new TreeNode(15);
+        treeNode2.left = treeNode3;
+
+        TreeNode treeNode4 = new TreeNode(7);
+        treeNode2.right = treeNode4;
+        TreeNode treeNode5 = invertTree(treeNode);
+        System.out.println(treeNode5);
+
+    }
+
     /**
      * 使用前后序解决较为方便   -> 递归的方式
      *
      * @param root 根节点
      * @return 返回
      */
-    public TreeNode invertTree(TreeNode root) {
+    public static TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return root;
         }
