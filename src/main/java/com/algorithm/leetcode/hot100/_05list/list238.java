@@ -6,7 +6,7 @@ package com.algorithm.leetcode.hot100._05list;
  * @date: 2024/1/11
  * @version: 1.0
  */
-public class list4 {
+public class list238 {
 
     /**
      给你一个整数数组 nums，返回 数组 answer ，其中 answer[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积 。

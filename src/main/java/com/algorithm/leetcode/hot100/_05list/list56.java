@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @date: 2024/1/10
  * @version: 1.0
  */
-public class list2 {
+public class list56 {
 
     /**
      * 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。
@@ -38,13 +38,13 @@ public class list2 {
             return intervals;
 
         //排序
-        Arrays.sort(intervals,(a,b)->a[0]-b[0]);
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
         for (int[] interval : intervals) {
-            if (arrayList.size()==0 || interval[0]>arrayList.get(arrayList.size()-1)[1]){
+            if (arrayList.size() == 0 || interval[0] > arrayList.get(arrayList.size() - 1)[1]) {
                 arrayList.add(interval);
             } else {
-                arrayList.get(arrayList.size()-1)[1] = Math.max(arrayList.get(arrayList.size()-1)[1],interval[1]);
+                arrayList.get(arrayList.size() - 1)[1] = Math.max(arrayList.get(arrayList.size() - 1)[1], interval[1]);
             }
         }
 
@@ -54,6 +54,7 @@ public class list2 {
 
     /**
      * 2024.1.10
+     *
      * @param intervals
      * @return
      */
@@ -62,17 +63,17 @@ public class list2 {
         ArrayList<int[]> ints = new ArrayList<>();
 
         //首先对数组进行排序  ->   按照二维数组的第一个数的大小排序
-        Arrays.sort(intervals,(a,b)->a[0]-b[0]);
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
         for (int[] interval : intervals) {
             //如果 当前数组没有值，则将当前的区间添加进行
             // 如果数组有值，则需要使得数组的最后一个区间的最大范围是小于当前区间的开区间的
-            if (ints.size()==0 || interval[0]>ints.get(ints.size()-1)[1]){
+            if (ints.size() == 0 || interval[0] > ints.get(ints.size() - 1)[1]) {
                 ints.add(interval);
-            }else {
+            } else {
                 //否则，我们认为区间是没有间隙的，是相连的
                 //需要判断数组的最大范围和当前区间的最大值谁大  谁大用谁
-                ints.get(ints.size()-1)[1] = Math.max(interval[1],ints.get(ints.size()-1)[1]);
+                ints.get(ints.size() - 1)[1] = Math.max(interval[1], ints.get(ints.size() - 1)[1]);
             }
         }
 
@@ -84,6 +85,7 @@ public class list2 {
 
     /**
      * 2024.1.11
+     *
      * @param intervals
      * @return
      */
@@ -93,15 +95,15 @@ public class list2 {
         ArrayList<int[]> ints = new ArrayList<>();
 
         //排序  以区间的开区间大小排序
-        Arrays.sort(intervals,(a,b) -> a[0]-b[0]);
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
         for (int[] interval : intervals) {
             //如果当前 interval 的左边大于当前 ints 中最右边的区间，则添加到 ints中
-            if (ints.size()==0 || interval[0]>ints.get(ints.size()-1)[1]){
+            if (ints.size() == 0 || interval[0] > ints.get(ints.size() - 1)[1]) {
                 ints.add(interval);
-            }else {
+            } else {
                 //否则 说明区间之间有交集，需要做合并处理
-                ints.get(ints.size()-1)[1]=Math.max(interval[1],ints.get(ints.size()-1)[1]);
+                ints.get(ints.size() - 1)[1] = Math.max(interval[1], ints.get(ints.size() - 1)[1]);
             }
         }
 

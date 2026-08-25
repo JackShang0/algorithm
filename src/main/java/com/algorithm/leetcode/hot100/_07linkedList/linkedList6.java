@@ -71,7 +71,7 @@ public class linkedList6 {
             return list1;
         }
 
-        //如果 链表1的值小于链表2的值，就将链表1的next指向 list1.next 和 list2 中更小的值   -> 递归
+        //如果 链表1的值小于链表2的值，就将链表1的next指向 list53.next 和 list2 中更小的值   -> 递归
         else if (list1.val < list2.val) {
             list1.next = mergeTwoLists2(list1.next, list2);
             return list1;
